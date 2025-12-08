@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'ideas/css/ideas.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="glass-card">
+    <h1>Ваші ідеї</h1>
+
+    <a href="{% url 'ideas:generate' %}" class="glass-button" style="margin-bottom: 20px; display:inline-block;">
+        Згенерувати нову ідею
+    </a>
+
+    {% if ideas %}
+        <div class="idea-list">
+            {% for idea in ideas %}
+                <div class="idea-item">
+                    <a href="{% url 'ideas:detail' idea.id %}">
+                        <h3>{{ idea.title }}</h3>
+                    </a>
+                    <p>{{ idea.description|truncatechars:120 }}</p>
+                    {% if idea.tags %}
+                        <small>Теги: {{ idea.tags }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>У вас ще немає ідей. Ви можете створити першу за допомогою генератора.</p>
+    {% endif %}
+</div>
+{% endblock %}
+

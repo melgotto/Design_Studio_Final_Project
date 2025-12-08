@@ -1,0 +1,109 @@
+/* Загальний стиль */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    color: #fff;
+    min-height: 100vh;
+}
+
+/* Glass ефект */
+.glass {
+    background: rgba(255, 255, 255, 0.13);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Навбар */
+.navbar {
+    width: 100%;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 12px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo a {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links a {
+    margin: 0 12px;
+    color: #dfe6e9;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #81ecec;
+}
+
+/* Навігація для авторизованого користувача */
+.nav-auth a {
+    margin-left: 15px;
+    color: #ffeaa7;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Logout button як посилання */
+/* Logout button та реєстраційна кнопка як glassmorphism */
+.nav-auth button.logout-btn,
+.nav-auth a.register-btn {
+    width: auto; /* або можна 100% для форми */
+    padding: 12px 20px;
+
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 12px;
+
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+
+    color: #ffffff;
+    transition: 0.2s ease-in-out;
+    text-decoration: none; /* для посилання register */
+}
+
+.nav-auth button.logout-btn:hover,
+.nav-auth a.register-btn:hover {
+    background: rgba(255, 255, 255, 0.7);
+    color: #333;
+}
+
+
+
+/* Основний контейнер */
+.main-container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+/* Footer */
+.footer {
+    max-width: 100%;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 60px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+

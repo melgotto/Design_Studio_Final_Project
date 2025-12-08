@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'ideas/css/ideas.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="glass-card">
+    <h1>{{ idea.title }}</h1>
+
+    <p><strong>Опис:</strong> {{ idea.description }}</p>
+
+    {% if idea.tags %}
+        <p><strong>Теги:</strong> {{ idea.tags }}</p>
+    {% endif %}
+
+    <p><strong>Створено:</strong> {{ idea.created_at|date:"d.m.Y H:i" }}</p>
+
+    <a href="{% url 'ideas:list' %}" class="glass-button">Назад до списку</a>
+</div>
+{% endblock %}
+

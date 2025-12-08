@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'accounts/css/accounts.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="glass-container">
+    <h2 class="title">Вхід</h2>
+
+    <form method="post" class="form-glass">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn-glass">Увійти</button>
+    </form>
+
+    <p class="alt-link">
+        <a href="{% url 'accounts:password_reset' %}">Забули пароль?</a><br>
+
+    </p>
+</div>
+{% endblock %}
+

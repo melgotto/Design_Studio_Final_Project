@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'accounts/css/accounts.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="glass-container profile">
+    <h2 class="title">Мій Профіль</h2>
+
+    <div class="profile-info">
+        <p><strong>Ім'я користувача:</strong> {{ user.username }}</p>
+        <p><strong>Email-адреса:</strong> {{ user.email }}</p>
+
+        {% if user.userprofile %}
+            <p><strong>Role:</strong> {{ user.userprofile.role }}</p>
+        {% endif %}
+    </div>
+
+
+    <form method="post" action="{% url 'accounts:logout' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-glass">Вийти</button>
+    </form>
+</div>
+{% endblock %}

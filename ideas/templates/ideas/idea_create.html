@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'ideas/css/ideas.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="glass-card">
+    <h1>Створення нової ідеї</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="glass-button" type="submit">Створити</button>
+    </form>
+
+    <hr>
+
+    <h3>Або згенерувати ідею автоматично</h3>
+    <a href="{% url 'idea_generate' %}" class="glass-button">Генерація</a>
+</div>
+{% endblock %}

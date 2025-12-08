@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'accounts/css/accounts.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="glass-container">
+    <h2 class="title">Створити <br>
+        Обліковий Запис</h2>
+
+    <form method="post" class="form-glass">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn-glass">Реєстрація</button>
+    </form>
+
+    <p class="alt-link">
+        <a href="{% url 'accounts:login' %}">Вже маєте акаунт?</a>
+    </p>
+</div>
+{% endblock %}
+
