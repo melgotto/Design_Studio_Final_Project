@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-1_t-&!rc-&8xwj!m%)r68^=&=i3j7=$s(%m1b8kn$mb8%k=52_'
 
 # Ключ API Unsplash
-UNSPLASH_ACCESS_KEY = 'GeMMwNa2pVJU8FW6JEZBty9po9TBiiFq52B8ymgvgsA'
+UNSPLASH_ACCESS_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
