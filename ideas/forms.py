@@ -33,6 +33,7 @@ class IdeaGenerationForm(forms.Form):
             ("sci-fi", "Наукова фантастика"),
             ("romance", "Романтика"),
         ],
+        label="Настрій",
         required=False
     )
     idea_type = forms.ChoiceField(

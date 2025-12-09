@@ -22,6 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-1_t-&!rc-&8xwj!m%)r68^=&=i3j7=$s(%m1b8kn$mb8%k=52_'
 
+# Ключ API Unsplash
+UNSPLASH_ACCESS_KEY = 'GeMMwNa2pVJU8FW6JEZBty9po9TBiiFq52B8ymgvgsA'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -34,6 +37,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'accounts.apps.AccountsConfig',
     'ideas.apps.IdeasConfig',
+    'references.apps.ReferencesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

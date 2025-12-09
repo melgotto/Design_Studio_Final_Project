@@ -3,15 +3,16 @@ from django.db import models
 
 class User(AbstractUser):
     ROLE_CHOICES = [
-        ('designer', 'Designer'),
-        ('art_director', 'Art Director'),
-        ('manager', 'Manager'),
-        ('client', 'Client'),
+        ('designer', 'Дизайнер'),
+        ('art_director', 'Арт Директор'),
+        ('manager', 'Менеджер'),
+        ('client', 'Клієнт'),
     ]
 
     role = models.CharField(
         max_length=20,
         choices=ROLE_CHOICES,
+        name='role',
         default='client'
     )
 

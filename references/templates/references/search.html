@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Пошук референсів{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Локальні стилі для цієї сторінки */
+    .search-container {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px;
+    }
+    
+    .search-form {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .glass-input, .glass-select {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 12px 20px;
+        border-radius: 12px;
+        color: #fff;
+        outline: none;
+        font-family: inherit;
+    }
+    
+    .glass-input::placeholder { color: rgba(255,255,255,0.6); }
+    .glass-select option { background: #243b55; } /* Щоб опції були читабельні */
+
+    .search-btn {
+        background: linear-gradient(45deg, #00b09b, #96c93d);
+        border: none;
+        padding: 12px 25px;
+        border-radius: 12px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    .search-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+    /* Сітка результатів */
+    .results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+
+    .image-card {
+        overflow: hidden;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .image-card:hover {
+        transform: scale(1.02);
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .image-card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .card-actions {
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .save-btn {
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.4);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    .save-btn:hover { background: #fff; color: #333; }
+    
+    .links-header {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        gap: 20px;
+    }
+    .links-header a {
+        color: #81ecec;
+        text-decoration: none;
+        font-weight: 600;
+        border-bottom: 2px solid transparent;
+    }
+    .links-header a.active { border-bottom-color: #81ecec; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="links-header">
+    <a href="{% url 'references:search' %}" class="active">Пошук зображень</a>
+    <a href="{% url 'references:library' %}">Моя бібліотека</a>
+</div>
+
+<div class="search-container glass">
+    <h2>Знайди натхнення</h2>
+    <p style="opacity: 0.8; margin-bottom: 20px;">Пошук високоякісних фотографій через Unsplash API</p>
+    
+    <form method="get" class="search-form">
+        {{ form.query }}
+        {{ form.color }}
+        {{ form.orientation }}
+        <button type="submit" class="search-btn">Шукати</button>
+    </form>
+</div>
+
+{% if results %}
+    <div class="results-grid">
+        {% for img in results %}
+        <div class="image-card glass">
+            <img src="{{ img.urls.small }}" alt="{{ img.alt_description }}">
+            <div class="card-actions">
+                <span style="font-size: 12px; opacity: 0.7;">Photo by {{ img.user.name }}</span>
+                
+                {% if user.is_authenticated %}
+                <form method="post" action="{% url 'references:save' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="image_url" value="{{ img.urls.regular }}">
+                    <input type="hidden" name="thumbnail_url" value="{{ img.urls.small }}">
+                    <input type="hidden" name="description" value="{{ img.alt_description|default:'Image' }}">
+                    <input type="hidden" name="source_id" value="{{ img.id }}">
+                    <button type="submit" class="save-btn">+ Зберегти</button>
+                </form>
+                {% else %}
+                <a href="{% url 'accounts:login' %}" style="font-size:12px; color:#ffeaa7;">Увійдіть щоб зберегти</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% elif request.GET.query %}
+    <div style="text-align:center; padding: 40px;">
+        <p>На жаль, за вашим запитом нічого не знайдено.</p>
+    </div>
+{% endif %}
+
+{% endblock %}

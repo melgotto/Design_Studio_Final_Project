@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Моя бібліотека{% endblock %}
+
+{% block extra_css %}
+<style>
+    .library-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    .ref-card img {
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+    }
+    .ref-content { padding: 15px; }
+    .download-link {
+        display: inline-block;
+        margin-top: 10px;
+        color: #81ecec;
+        text-decoration: none;
+        font-size: 14px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="text-align: center; margin-bottom: 30px;">
+    <h2>Моя бібліотека референсів</h2>
+    <a href="{% url 'references:search' %}" style="color: #ffeaa7;">← Повернутися до пошуку</a>
+</div>
+
+{% if references %}
+    <div class="library-grid">
+        {% for ref in references %}
+        <div class="glass ref-card">
+            <img src="{{ ref.thumbnail_url }}" alt="{{ ref.description }}">
+            <div class="ref-content">
+                <p style="font-size: 14px; margin: 0;">{{ ref.description|truncatechars:30 }}</p>
+                <a href="{{ ref.image_url }}" target="_blank" class="download-link">Відкрити оригінал ↗</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="glass" style="text-align:center; padding:50px;">
+        <p>У вас поки немає збережених референсів.</p>
+        <a href="{% url 'references:search' %}" class="register-btn" style="display:inline-block; margin-top:15px;">Знайти ідеї</a>
+    </div>
+{% endif %}
+{% endblock %}
