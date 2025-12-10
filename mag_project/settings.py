@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'ideas.apps.IdeasConfig',
     'references.apps.ReferencesConfig',
     'community.apps.CommunityConfig',
+    'dashboard.apps.DashboardConfig',
+    'tests.apps.TestsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Тестування стану{% endblock %}
+
+{% block extra_css %}
+<style>
+    .test-card {
+        padding: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .result-box {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 40px;
+        text-align: center;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    .start-btn {
+        background: linear-gradient(45deg, #fdcb6e, #e17055);
+        color: white;
+        padding: 10px 25px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .start-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(225, 112, 85, 0.4); }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <h2 style="text-align: center; margin-bottom: 30px;">Моніторинг емоційного стану</h2>
+
+    {% if last_result %}
+    <div class="result-box">
+        <h3 style="margin: 0 0 10px 0; color: #81ecec;">Останній результат</h3>
+        <p style="font-size: 1.2rem; font-weight: bold;">{{ last_result.result_text }}</p>
+        <p style="opacity: 0.8;">{{ last_result.recommendation }}</p>
+        <small style="opacity: 0.5;">Дата: {{ last_result.date_taken|date:"d.m.Y H:i" }}</small>
+    </div>
+    {% endif %}
+
+    <h3 style="margin-bottom: 20px;">Доступні тести</h3>
+    
+    {% for test in tests %}
+    <div class="glass test-card">
+        <div>
+            <h3 style="margin: 0 0 10px 0;">{{ test.title }}</h3>
+            <p style="opacity: 0.7; margin: 0;">{{ test.description }}</p>
+        </div>
+        <a href="{% url 'tests:take' test.id %}" class="start-btn">Пройти тест</a>
+    </div>
+    {% empty %}
+    <p style="text-align: center;">Тестів поки немає. Попросіть адміністратора додати їх.</p>
+    {% endfor %}
+</div>
+{% endblock %}

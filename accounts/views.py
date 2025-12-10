@@ -21,7 +21,7 @@ def login_view(request):
 
             if user:
                 login(request, user)
-                return redirect("accounts:profile")  # твоя панель
+                return redirect("dashboard:index")  # твоя панель
 
     else:
         form = LoginForm()

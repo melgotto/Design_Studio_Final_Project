@@ -23,5 +23,7 @@ urlpatterns = [
     path("ideas/", include("ideas.urls")),
     path("community/", include("community.urls")),
     path("references/", include("references.urls")),
+    path("tests/", include("tests.urls")),
+    path('dashboard/', include('dashboard.urls')),
     path("admin/", admin.site.urls),
 ]
