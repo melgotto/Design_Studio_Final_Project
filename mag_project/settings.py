@@ -34,7 +34,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'main.apps.MainConfig',
     'accounts.apps.AccountsConfig',
     'ideas.apps.IdeasConfig',
     'references.apps.ReferencesConfig',
